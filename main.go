@@ -29,6 +29,10 @@ func main() {
 
 	// uploadされたらこれ
 	r.POST("/", func(c *gin.Context) {
+		// Language
+		lang := c.PostForm("lang")
+		fmt.Println(lang)
+
 		// 時刻オブジェクト
 		t := time.Now()
 		const layout = "2006-01-02_15-04-05"
@@ -75,10 +79,10 @@ func main() {
 		}
 
 		// OCRする
-		if _, err = exec.Command("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn").CombinedOutput(); err != nil {
+		if _, err = exec.Command("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, lang).CombinedOutput(); err != nil {
 			fmt.Println("t-ocr command exec error: ", err)
 		} else {
-			fmt.Println("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn")
+			fmt.Println("t-ocr command ok!")
 		}
 
 		// zipする
@@ -86,7 +90,7 @@ func main() {
 		if _, err = exec.Command("7z.exe", "a", "-r", "-tzip", dlFile, uploadDir).CombinedOutput(); err != nil {
 			fmt.Println("7z zip command exec error: ", err)
 		} else {
-			fmt.Println("7z.exe", "a", "-r", "-tzip", dlFile, uploadDir)
+			fmt.Println("Zip ok!")
 		}
 
 		// ダウンロードさせるファイル名

@@ -122,6 +122,10 @@
             <input type="file" name="upload" id="elmFile" accept="application/zip" required>
             <input class="upload_button" type="submit" id="btnUpload" value="upload"
                 onclick="IsTxtFile(document.getElementById('elmFile').value);DisableButton(this);">
+			<p>Select language: <select name="lang">
+            	<option value="jpn">Japanese</option>
+            	<option value="eng">English</option>
+        	</select></p>
         </div>
     </form>
     <p><strong>{{ .downloadMessage }}</strong><a href="results/{{ .downloadfile }}"
@@ -134,16 +138,13 @@
             <p><strong>REQUIREMENTS</strong></p>
             <ul>
                 <li>Chrome or Firefox</li>
+				<li>jpg, png, gif, bmp</li>
             </ul>
             <p><strong>USAGE</strong></p>
             <ul>
                 <li>Specify <strong>*.zip</strong> file.</li>
                 <li>Click <strong>[upload]</strong> button.</li>
                 <li>Please download Zip file when the download link comes out.</li>
-            </ul>
-            <p><strong>NOTE</strong></p>
-            <ul>
-                <li></li>
             </ul>
         </div>
     </div>
