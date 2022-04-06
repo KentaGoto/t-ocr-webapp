@@ -75,10 +75,10 @@ func main() {
 		}
 
 		// OCRする
-		_, err = exec.Command("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn").CombinedOutput()
-		fmt.Println("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn")
-		if err != nil {
+		if _, err = exec.Command("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn").CombinedOutput(); err != nil {
 			fmt.Println("t-ocr command exec error: ", err)
+		} else {
+			fmt.Println("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, "jpn")
 		}
 
 		// zipする
@@ -100,5 +100,5 @@ func main() {
 		})
 	})
 
-	r.Run(":12")
+	r.Run(":16")
 }
