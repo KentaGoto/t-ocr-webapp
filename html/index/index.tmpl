@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Style-Type" content="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        // 対象ファイルの拡張子
+        // Target file extensions
         function getExtension(fileName) {
             var ret;
             if (!fileName) {
@@ -23,7 +23,7 @@
         }
 
         var flag = 0;
-        // 対象ファイルがzipかどうか
+        // Whether the target file is a zip or not
         function IsTxtFile(fileName) {
             var Extension = getExtension(fileName);
             if (Extension.toLowerCase() === "zip") {
@@ -34,7 +34,7 @@
             }
         }
 
-        // uploadボタンのクリック後
+        // After clicking the upload button
         function DisableButton(b) {
             b.disabled = true;
             b.value = 'Submitting';
@@ -48,7 +48,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Meiryo, sans-serif;
         }
 
-        /* アップロードボタン*/
+        /* Upload Button*/
         input.upload_button {
             font-size: 1.0em;
             font-weight: bold;
@@ -58,13 +58,13 @@
             border-style: none;
         }
 
-        /*アップロードボタンホバー*/
+        /*Upload Button Hover*/
         input.upload_button:hover {
             background-color: rgb(80, 208, 247);
             color: #fff;
         }
 
-        /*ボックス全体*/
+        /*Whole box*/
         .accbox {
             margin: 2em 0;
             padding: 0;
@@ -72,7 +72,7 @@
             /*最大幅*/
         }
 
-        /*ラベル*/
+        /*Label*/
         .accbox label {
             display: block;
             margin: 1.5px 0;
@@ -84,12 +84,12 @@
             transition: all 0.5s;
         }
 
-        /*ラベルホバー時*/
+        /*When label hover*/
         .accbox label:hover {
             background: #dfdfdf;
         }
 
-        /*チェックは隠す*/
+        /*Hide checkboxes*/
         .accbox input {
             display: none;
         }
@@ -103,7 +103,7 @@
             transition: 0.8s;
         }
 
-        /*クリックで中身表示*/
+        /*Click to view contents*/
         .cssacc:checked+.accshow {
             height: auto;
             padding: 5px;
