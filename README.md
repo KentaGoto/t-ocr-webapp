@@ -4,7 +4,7 @@
 https://github.com/KentaGoto/t-ocr
 
 ## Requires
-- Tesseract 5
+- Tesseract 5 (https://github.com/UB-Mannheim/tesseract/wiki)
 - Windows
 - Go
 
