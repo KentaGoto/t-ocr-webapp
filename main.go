@@ -20,8 +20,13 @@ func main() {
 	r.Static("/results", "./results") // 静的ディレクトリとしておかないとHTMLのダウンロードリンクからアクセスできない
 	r.LoadHTMLGlob("html/**/*.tmpl")
 
+	// ベーシック認証
+	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
+		"user": "password",
+	}))
+
 	// アクセスされたらこれを表示
-	r.GET("/", func(c *gin.Context) {
+	authorized.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "html/index.tmpl", gin.H{
 			"title": "t-ocr",
 		})
