@@ -1,6 +1,6 @@
 # t-ocr-webapp
-社内アプリ版。  
-以下のCLIの拡張。  
+
+Below is the CLI version.  
 https://github.com/KentaGoto/t-ocr
 
 ## Requires
