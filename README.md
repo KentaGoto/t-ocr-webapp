@@ -7,6 +7,8 @@ https://github.com/KentaGoto/t-ocr
 - Japanese
 - English
 - Korean
+- Chinese (Simplified)
+- Chinese (Traditional)
 
 ## Requires
 - Tesseract 5 (https://github.com/UB-Mannheim/tesseract/wiki)
