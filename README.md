@@ -12,6 +12,7 @@ https://github.com/KentaGoto/t-ocr
 
 ## Requires
 - Tesseract 5 (https://github.com/UB-Mannheim/tesseract/wiki)
+- Traineddata Files (https://tesseract-ocr.github.io/tessdoc/Data-Files)
 - Windows
 - Go
 
