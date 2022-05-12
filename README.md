@@ -9,6 +9,7 @@ https://github.com/KentaGoto/t-ocr
 - Korean
 - Chinese (Simplified)
 - Chinese (Traditional)
+- German
 
 ## Requires
 - Tesseract 5 (https://github.com/UB-Mannheim/tesseract/wiki)
