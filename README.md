@@ -1,8 +1,5 @@
 # t-ocr-webapp
 
-Below is the CLI version.  
-https://github.com/KentaGoto/t-ocr
-
 ## Languages Supported
 - Japanese
 - English
@@ -13,6 +10,9 @@ https://github.com/KentaGoto/t-ocr
 - Italy
 - German
 - Spanish
+
+## CLI
+https://github.com/KentaGoto/t-ocr
 
 ## Requires
 - Tesseract 5 (https://github.com/UB-Mannheim/tesseract/wiki)
