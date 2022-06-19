@@ -11,7 +11,7 @@
 - German
 - Spanish
 
-## CLI
+## CLI version
 https://github.com/KentaGoto/t-ocr
 
 ## Requires
