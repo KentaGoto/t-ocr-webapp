@@ -20,5 +20,8 @@ https://github.com/KentaGoto/t-ocr
 - Windows
 - Go
 
+## License
+MIT
+
 ## Author
 Kenta Goto
