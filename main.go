@@ -13,37 +13,37 @@ import (
 )
 
 func main() {
-	exe, _ := os.Executable()    // 実行ファイルのフルパス
-	rootDir := filepath.Dir(exe) // 実行ファイルのあるディレクトリ
+	exe, _ := os.Executable()
+	rootDir := filepath.Dir(exe)
 
 	r := gin.Default()
-	r.Static("/results", "./results") // 静的ディレクトリとしておかないとHTMLのダウンロードリンクからアクセスできない
+	r.Static("/results", "./results")
 	r.LoadHTMLGlob("html/**/*.tmpl")
 
-	// ベーシック認証
+	// Basic Auth
 	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
 		"user": "password",
 	}))
 
-	// アクセスされたらこれを表示
+	// Top
 	authorized.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "html/index.tmpl", gin.H{
 			"title": "t-ocr",
 		})
 	})
 
-	// uploadされたらこれ
+	// Display after upload.
 	r.POST("/", func(c *gin.Context) {
 		// Language
 		lang := c.PostForm("lang")
 		fmt.Println(lang)
 
-		// 時刻オブジェクト
+		// Time object
 		t := time.Now()
 		const layout = "2006-01-02_15-04-05"
 		tFormat := t.Format(layout)
 
-		// アップロードされたファイルを格納するディレクトリ作成
+		// Create directory to store uploaded files.
 		uploadDir := rootDir + "\\" + "uploaded" + "\\" + tFormat
 		if err := os.Mkdir(uploadDir, 0777); err != nil {
 			fmt.Println(err)
@@ -56,7 +56,7 @@ func main() {
 		}
 		log.Println(file.Filename)
 
-		// 特定のディレクトリにファイルをアップロードする
+		// Upload files to a specific directory.
 		fileBase := filepath.Base(file.Filename)
 		os.Rename(fileBase, tFormat+"_"+fileBase)
 		dst := rootDir + "\\uploaded" + "\\" + tFormat + "\\" + fileBase
@@ -66,7 +66,7 @@ func main() {
 			return
 		}
 
-		// アップロードされたzipファイルをunzip
+		// Unzip uploaded zip file.
 		fmt.Println(uploadDir)
 		unzipCmd := exec.Command("7z.exe", "x", "-y", "-o"+uploadDir, dst)
 		fmt.Println(unzipCmd)
@@ -76,21 +76,21 @@ func main() {
 			fmt.Println("Unzip ok!")
 		}
 
-		// アップロードされたzipファイルを削除
+		// Delete uploaded zip file.
 		if err := os.Remove(dst); err != nil {
 			fmt.Println("Remove error:", err)
 		} else {
 			fmt.Println("Delete zip file!")
 		}
 
-		// OCRする
+		// Run OCR
 		if _, err = exec.Command("cmd.exe", "/c", rootDir+"\\"+"t-ocr"+"\\"+"t-ocr.exe", uploadDir, lang).CombinedOutput(); err != nil {
 			fmt.Println("t-ocr command exec error: ", err)
 		} else {
 			fmt.Println("t-ocr command ok!")
 		}
 
-		// zipする
+		// Zip
 		dlFile := rootDir + "\\" + "results" + "\\" + tFormat + ".zip"
 		if _, err = exec.Command("7z.exe", "a", "-r", "-tzip", dlFile, uploadDir).CombinedOutput(); err != nil {
 			fmt.Println("7z zip command exec error: ", err)
@@ -98,10 +98,9 @@ func main() {
 			fmt.Println("Zip ok!")
 		}
 
-		// ダウンロードさせるファイル名
 		resultFile := tFormat + ".zip"
 
-		// index.tmplを書き換えて、HTMLからダウンロードさせる
+		// Let them download it.
 		c.HTML(http.StatusOK, "html/index.tmpl", gin.H{
 			"title":           "t-ocr",
 			"downloadMessage": "Please download: ",
